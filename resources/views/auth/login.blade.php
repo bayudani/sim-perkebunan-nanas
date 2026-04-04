@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - SIM Perkebunan Nanas</title>
-    <!-- Load Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+   <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
     </style>
 </head>
 <body class="bg-slate-50 flex items-center justify-center min-h-screen relative overflow-hidden">
 
-    <!-- Efek Background (Lingkaran Hijau Abstrak) -->
     <div class="absolute -top-40 -left-40 w-96 h-96 bg-emerald-200 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
     <div class="absolute top-40 -right-40 w-96 h-96 bg-emerald-300 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
     <div class="absolute -bottom-40 left-20 w-96 h-96 bg-emerald-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
@@ -34,7 +34,6 @@
             </h1>
         </div>
 
-        <!-- Session Status (Jika ada pesan error/sukses dari Breeze) -->
         @if (session('status'))
             <div class="mb-4 font-medium text-sm text-emerald-600 text-center bg-emerald-50 py-2 rounded-lg">
                 {{ session('status') }}
@@ -103,7 +102,7 @@
             </div>
         </form>
 
-        <!-- Catatan Testing (Bisa dihapus nanti saat mau sidang) -->
+        {{-- <!-- Catatan Testing  -->
         <div class="mt-8 pt-6 border-t border-slate-100">
             <p class="text-xs text-center text-slate-400 mb-2">Akun Testing Joki:</p>
             <div class="flex justify-center gap-4 text-xs">
@@ -115,7 +114,7 @@
                 </div>
             </div>
             <p class="text-xs text-center text-slate-400 mt-2">Pass: password</p>
-        </div>
+        </div> --}}
 
     </div>
 </body>

@@ -8,7 +8,7 @@ use App\Http\Controllers\PendapatanController;
 use App\Http\Controllers\LaporanKeuanganController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
