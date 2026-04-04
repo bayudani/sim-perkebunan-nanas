@@ -34,7 +34,6 @@
         <!-- Container Tabel -->
         <div class="overflow-x-auto pb-4">
             
-            <!-- Tabel dengan efek baris melayang (Sama persis dengan Biaya Operasional) -->
             <table class="w-full text-left border-separate border-spacing-y-3 min-w-max">
                 
                 <!-- Header Tabel "Pill" -->
@@ -83,7 +82,6 @@
                                 {{ $item->kualitas }}
                             </span>
                         </td>
-                        <!-- Cek hak akses untuk menentukan sudut melengkung di kanan -->
                         <td class="bg-white p-4 text-slate-500 {{ auth()->user()->role === 'admin' ? '' : 'rounded-r-2xl' }} group-hover:bg-emerald-50/30 transition-colors">
                             {{ $item->keterangan ?? '-' }}
                         </td>

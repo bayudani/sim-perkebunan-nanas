@@ -20,7 +20,7 @@ class BiayaOperasionalController extends Controller
 
     public function create()
     {
-        // Proteksi: Hanya Admin yang boleh tambah data
+        // Hanya Admin yang boleh tambah data
         if (auth()->user()->role !== 'admin') {
             abort(403, 'Akses Ditolak. Hanya Admin yang dapat menambah data.');
         }
@@ -44,7 +44,7 @@ class BiayaOperasionalController extends Controller
             'jenis_biaya' => $request->jenis_biaya,
             'jumlah' => $request->jumlah,
             'keterangan' => $request->keterangan,
-            'user_id' => auth()->id(), // Otomatis simpan ID user yang login
+            'user_id' => auth()->id(), 
         ]);
 
         return redirect()->route('biaya-operasional.index')->with('success', 'Data biaya operasional berhasil ditambahkan!');
@@ -75,7 +75,6 @@ class BiayaOperasionalController extends Controller
             'jenis_biaya' => $request->jenis_biaya,
             'jumlah' => $request->jumlah,
             'keterangan' => $request->keterangan,
-            // user_id tidak diubah agar ketahuan siapa pembuat awalnya
         ]);
 
         return redirect()->route('biaya-operasional.index')->with('success', 'Data biaya operasional berhasil diperbarui!');

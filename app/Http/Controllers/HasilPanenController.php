@@ -20,7 +20,7 @@ class HasilPanenController extends Controller
 
     public function create()
     {
-        // Proteksi: Hanya Admin yang boleh tambah data
+        //  Hanya Admin yang boleh tambah data
         if (auth()->user()->role !== 'admin') {
             abort(403, 'Akses Ditolak. Hanya Admin yang dapat menambah data.');
         }
@@ -44,7 +44,7 @@ class HasilPanenController extends Controller
             'jumlah_panen' => $request->jumlah_panen,
             'kualitas' => $request->kualitas,
             'keterangan' => $request->keterangan,
-            'user_id' => auth()->id(), // Otomatis simpan ID user yang login
+            'user_id' => auth()->id(), 
         ]);
 
         return redirect()->route('hasil-panen.index')->with('success', 'Data hasil panen berhasil ditambahkan!');

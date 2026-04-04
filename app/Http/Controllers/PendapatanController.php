@@ -21,7 +21,7 @@ class PendapatanController extends Controller
 
     public function create()
     {
-        // Proteksi: Hanya Admin yang boleh tambah data
+        //  Hanya Admin yang boleh tambah data
         if (auth()->user()->role !== 'admin') {
             abort(403, 'Akses Ditolak. Hanya Admin yang dapat menambah data.');
         }
@@ -50,7 +50,7 @@ class PendapatanController extends Controller
             'harga_per_kg' => $request->harga_per_kg,
             'total_pendapatan' => $request->total_pendapatan,
             'keterangan' => $request->keterangan,
-            'user_id' => auth()->id(), // Otomatis simpan ID user yang login
+            'user_id' => auth()->id(), 
         ]);
 
         return redirect()->route('pendapatan.index')->with('success', 'Data pendapatan berhasil ditambahkan!');

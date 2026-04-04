@@ -40,7 +40,7 @@ class DashboardController extends Controller
         // Gabungkan, urutkan berdasarkan tanggal terbaru, lalu ambil 5 teratas
         $aktivitasTerbaru = $biayaRecent->concat($pendapatanRecent)->sortByDesc('tanggal')->take(5);
 
-        // 3. Persiapkan Data untuk Grafik (Bulan 1 s/d 12 Tahun Berjalan)
+        // 3.  Data untuk Grafik (Bulan 1 s/d 12 Tahun Berjalan)
         $tahunIni = date('Y');
         $chartPemasukan = [];
         $chartPengeluaran = [];
