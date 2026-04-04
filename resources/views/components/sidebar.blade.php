@@ -1,14 +1,11 @@
-<!-- Sidebar dengan animasi slide (x-bind class dari Alpine.js) -->
 <aside 
     :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
     class="fixed inset-y-0 left-0 z-50 w-64 bg-emerald-800 text-white flex flex-col shadow-2xl transition-transform duration-300 ease-in-out md:translate-x-0"
 >
-    <!-- Tombol Close (X) Khusus Mobile -->
     <button @click="sidebarOpen = false" class="md:hidden absolute top-4 right-4 p-2 bg-emerald-700 hover:bg-red-500 rounded-lg text-white transition-colors">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
     </button>
 
-    <!-- Header Logo -->
     <div class="flex items-center justify-center h-20 border-b border-emerald-700/50 bg-emerald-900/30 mt-12 md:mt-0">
         <div class="flex items-center gap-3">
             <span class="text-3xl">🍍</span>
@@ -19,10 +16,8 @@
         </div>
     </div>
 
-    <!-- Role Indicator Badge (Sesuai kode kamu) -->
     <div class="px-4 pt-5 pb-1">
         <div class="bg-emerald-700/50 border border-emerald-600/50 rounded-xl px-4 py-2.5 flex items-center justify-center shadow-sm">
-            {{-- <span class="text-xs font-medium text-emerald-200">Login sebagai:</span> --}}
             <div class="flex items-center gap-1.5">
                 <div class="w-1.5 h-1.5 rounded-full {{ auth()->user()->role === 'admin' ? 'bg-amber-400' : 'bg-blue-400' }} animate-pulse"></div>
                 <span class="text-sm font-bold text-white capitalize">{{ auth()->user()->role ?? 'Guest' }}</span>
