@@ -1,0 +1,69 @@
+<x-app-layout>
+    <x-slot name="header">{{ isset($biaya) ? 'Edit Biaya Operasional' : 'Tambah Biaya Operasional' }}</x-slot>
+    <x-slot name="description">Pastikan data yang diinputkan sudah benar.</x-slot>
+
+    <div class="max-w-3xl bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-8">
+        
+        <form action="{{ isset($biaya) ? route('biaya-operasional.update', $biaya->id) : route('biaya-operasional.store') }}" method="POST" class="space-y-6">
+            @csrf
+            @if(isset($biaya))
+                @method('PUT')
+            @endif
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Tanggal -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Tanggal Pengeluaran <span class="text-red-500">*</span></label>
+                    <input type="date" name="tanggal" value="{{ old('tanggal', $biaya->tanggal ?? date('Y-m-d')) }}" required
+                        class="w-full border-slate-200 rounded-xl focus:ring-emerald-500 focus:border-emerald-500">
+                    @error('tanggal') <span class="text-xs text-red-500 mt-1">{{ $message }}</span> @enderror
+                </div>
+
+                <!-- Jenis Biaya -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Jenis Biaya <span class="text-red-500">*</span></label>
+                    <select name="jenis_biaya" required class="w-full border-slate-200 rounded-xl focus:ring-emerald-500 focus:border-emerald-500">
+                        <option value="">-- Pilih Jenis --</option>
+                        <option value="Pupuk" {{ old('jenis_biaya', $biaya->jenis_biaya ?? '') == 'Pupuk' ? 'selected' : '' }}>Pupuk</option>
+                        <option value="Tenaga Kerja" {{ old('jenis_biaya', $biaya->jenis_biaya ?? '') == 'Tenaga Kerja' ? 'selected' : '' }}>Tenaga Kerja</option>
+                        <option value="Transportasi" {{ old('jenis_biaya', $biaya->jenis_biaya ?? '') == 'Transportasi' ? 'selected' : '' }}>Transportasi</option>
+                        <option value="Perawatan Alat" {{ old('jenis_biaya', $biaya->jenis_biaya ?? '') == 'Perawatan Alat' ? 'selected' : '' }}>Perawatan Alat</option>
+                        <option value="Pestisida" {{ old('jenis_biaya', $biaya->jenis_biaya ?? '') == 'Pestisida' ? 'selected' : '' }}>Pestisida</option>
+                        <option value="Lainnya" {{ old('jenis_biaya', $biaya->jenis_biaya ?? '') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                    </select>
+                    @error('jenis_biaya') <span class="text-xs text-red-500 mt-1">{{ $message }}</span> @enderror
+                </div>
+            </div>
+
+            <!-- Nominal / Jumlah -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-2">Nominal Biaya (Rp) <span class="text-red-500">*</span></label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <span class="text-slate-500 font-medium">Rp</span>
+                    </div>
+                    <input type="number" name="jumlah" value="{{ old('jumlah', isset($biaya) ? (int)$biaya->jumlah : '') }}" required min="0"
+                        class="w-full pl-12 border-slate-200 rounded-xl focus:ring-emerald-500 focus:border-emerald-500" placeholder="Contoh: 1500000">
+                </div>
+                @error('jumlah') <span class="text-xs text-red-500 mt-1">{{ $message }}</span> @enderror
+            </div>
+
+            <!-- Keterangan -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-2">Keterangan Tambahan (Opsional)</label>
+                <textarea name="keterangan" rows="3" class="w-full border-slate-200 rounded-xl focus:ring-emerald-500 focus:border-emerald-500" placeholder="Contoh: Pembelian pupuk NPK 5 karung...">{{ old('keterangan', $biaya->keterangan ?? '') }}</textarea>
+                @error('keterangan') <span class="text-xs text-red-500 mt-1">{{ $message }}</span> @enderror
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-4 pt-4 border-t border-slate-100">
+                <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-xl font-medium transition-colors">
+                    {{ isset($biaya) ? 'Simpan Perubahan' : 'Tambah Data' }}
+                </button>
+                <a href="{{ route('biaya-operasional.index') }}" class="text-slate-500 hover:text-slate-700 font-medium px-4 py-2">
+                    Batal
+                </a>
+            </div>
+        </form>
+    </div>
+</x-app-layout>
