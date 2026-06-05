@@ -30,7 +30,7 @@
             </div>
             <h1 class="text-xl font-bold text-slate-800 text-center leading-snug">
                 SIMPENAS<br>
-                <span class="text-emerald-600">Sistem Informasi Perkebunan Nanas</span>
+                {{-- <span class="text-emerald-600">Sistem Informasi Perkebunan Nanas</span> --}}
             </h1>
         </div>
 
