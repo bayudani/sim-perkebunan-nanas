@@ -29,8 +29,8 @@
                 </svg>
             </div>
             <h1 class="text-xl font-bold text-slate-800 text-center leading-snug">
-                Sistem Informasi Manajemen<br>
-                <span class="text-emerald-600">Perkebunan Nanas Berbasis Web</span>
+                SIMPENAS<br>
+                <span class="text-emerald-600">Sistem Informasi Perkebunan Nanas</span>
             </h1>
         </div>
 
