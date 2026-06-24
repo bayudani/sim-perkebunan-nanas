@@ -47,21 +47,32 @@
                 <main class="p-4 md:p-8 flex-1 w-full overflow-x-hidden">
                     
                     <!-- Topbar/Header Desktop  -->
-                    @isset($header)
-                        <header class="hidden md:flex mb-8 items-center justify-between">
-                            <div>
+                    <header class="hidden md:flex mb-8 items-center justify-between">
+                        <div>
+                            @isset($header)
                                 <h1 class="text-3xl font-bold text-slate-800 tracking-tight">{{ $header }}</h1>
                                 @isset($description)
                                     <p class="text-sm text-slate-500 mt-1">{{ $description }}</p>
                                 @endisset
-                            </div>
-                            
-                            <!-- Tanggal Hari Ini -->
-                            <div class="flex items-center gap-4 bg-white px-4 py-2 rounded-2xl shadow-sm border border-slate-100">
+                            @endisset
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            {{-- <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-2xl shadow-sm border border-slate-100">
                                 <span class="text-sm font-medium text-slate-600">{{ now()->translatedFormat('l, d F Y') }}</span>
+                            </div> --}}
+                            <!-- Profile Preview -->
+                            <div class="flex items-center gap-3 bg-white px-4 py-2 rounded-2xl shadow-sm border border-slate-100">
+                                <div class="w-9 h-9 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold shadow-inner text-sm">
+                                    {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
+                                </div>
+                                <div class="flex flex-col leading-tight">
+                                    <span class="text-sm font-semibold text-slate-800">{{ auth()->user()->name ?? 'User' }}</span>
+                                    <span class="text-xs text-emerald-600 capitalize">{{ auth()->user()->role ?? 'Role' }}</span>
+                                </div>
                             </div>
-                        </header>
-                    @endisset
+                        </div>
+                    </header>
 
                     <!-- Slot Konten Utama (Dashboard, Tabel, dll) -->
                     <div class="animate-fade-in-up">

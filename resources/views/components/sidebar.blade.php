@@ -60,18 +60,8 @@
         </a>
     </nav>
 
-    <!-- User & Logout Section -->
+    <!-- Logout Section -->
     <div class="p-4 border-t border-emerald-700/50 bg-emerald-900/50">
-        <div class="flex items-center gap-3 mb-4 px-2">
-            <div class="w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold shadow-inner">
-                {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
-            </div>
-            <div class="flex flex-col">
-                <span class="text-sm font-semibold text-white">{{ auth()->user()->name ?? 'User' }}</span>
-                <span class="text-xs text-emerald-300 capitalize">{{ auth()->user()->role ?? 'Role' }}</span>
-            </div>
-        </div>
-        
         <!-- Form Logout -->
         <form method="POST" action="{{ route('logout') }}">
             @csrf
