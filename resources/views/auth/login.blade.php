@@ -24,7 +24,7 @@
     <div class="flex w-full max-w-[1100px] min-h-[650px] bg-white rounded-[2rem] shadow-2xl overflow-hidden relative">
         
         <div class="hidden lg:flex lg:w-1/2 relative bg-cover bg-center" style="background-image: url('/images/bg.jpeg');">
-            <div class="absolute inset-0 bg-gradient-to-b from-white/80 via-white/30 to-transparent pointer-events-none"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-white/95 via-white/60 to-white/20 pointer-events-none"></div>
             
             <div class="relative z-10 p-12 w-full h-full flex items-center justify-center">
                 <!-- Logo & Text SIMPENAS -->
