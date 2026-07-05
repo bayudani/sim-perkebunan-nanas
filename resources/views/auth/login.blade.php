@@ -26,18 +26,15 @@
         <div class="hidden lg:flex lg:w-1/2 relative bg-cover bg-center" style="background-image: url('/images/bg.jpeg');">
             <div class="absolute inset-0 bg-gradient-to-b from-white/80 via-white/30 to-transparent pointer-events-none"></div>
             
-            <div class="relative z-10 p-12 w-full">
+            <div class="relative z-10 p-12 w-full h-full flex items-center justify-center">
                 <!-- Logo & Text SIMPENAS -->
                 <div class="flex items-center gap-4">
                     <!-- Icon Nanas Custom SVG -->
                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="drop-shadow-sm">
-                        <!-- Daun Nanas -->
                         <path d="M12 2C12 2 9 4 9 7C9 9 12 11 12 11C12 11 15 9 15 7C15 4 12 2 12 2Z" fill="#10B981"/>
                         <path d="M9 7C9 7 6 7 6 10C6 12 9 14 9 14" fill="#059669"/>
                         <path d="M15 7C15 7 18 7 18 10C18 12 15 14 15 14" fill="#059669"/>
-                        <!-- Badan Nanas -->
                         <path d="M7 14C7 18.4183 9.23858 22 12 22C14.7614 22 17 18.4183 17 14C17 12 15 11 12 11C9 11 7 12 7 14Z" fill="#F59E0B"/>
-                        <!-- Garis Nanas -->
                         <path d="M9.5 13.5L14.5 18.5M14.5 13.5L9.5 18.5" stroke="#D97706" stroke-width="1.5" stroke-linecap="round"/>
                         <path d="M8 16.5L11 19.5M16 16.5L13 19.5" stroke="#D97706" stroke-width="1.5" stroke-linecap="round"/>
                     </svg>
@@ -48,12 +45,6 @@
                             Sistem Informasi Manajemen<br>Perkebunan Nanas
                         </p>
                     </div>
-                </div>
-                
-                <div class="mt-8 text-emerald-900/90 max-w-sm">
-                    <p class="font-medium text-lg leading-relaxed">
-                        Hadir untuk manajemen perkebunan yang lebih terpadu, presisi, dan efisien.
-                    </p>
                 </div>
             </div>
         </div>
