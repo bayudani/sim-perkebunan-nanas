@@ -33,7 +33,7 @@
         .summary td {
             padding: 15px;
             text-align: center;
-            width: 33.33%;
+            width: 25%;
             border: 1px solid #ddd;
         }
         .summary h3 {
@@ -87,6 +87,10 @@
                 <h3>Saldo Bersih</h3>
                 <p class="text-blue">Rp. {{ number_format($saldo, 0, ',', '.') }}</p>
             </td>
+            <td>
+                <h3>Biji Terjual</h3>
+                <p style="color: #d97706;">{{ number_format($totalBijiTerjual, 0, ',', '.') }} Biji</p>
+            </td>
         </tr>
     </table>
 
@@ -95,8 +99,9 @@
         <thead>
             <tr>
                 <th width="5%">No</th>
-                <th width="20%">Tanggal</th>
-                <th width="50%">Keterangan / Sumber</th>
+                <th width="16%">Tanggal</th>
+                <th width="42%">Keterangan / Sumber</th>
+                <th width="12%" class="text-right">Jumlah</th>
                 <th width="25%" class="text-right">Nominal</th>
             </tr>
         </thead>
@@ -106,11 +111,12 @@
                 <td>{{ $index + 1 }}</td>
                 <td>{{ \Carbon\Carbon::parse($masuk->tanggal)->format('d-m-Y') }}</td>
                 <td>Penjualan nanas {{ $masuk->hasilPanen ? '('.$masuk->hasilPanen->kualitas.')' : '' }}</td>
+                <td class="text-right">{{ number_format($masuk->jumlah_terjual, 0, ',', '.') }} Biji</td>
                 <td class="text-right text-green">+ Rp. {{ number_format($masuk->total_pendapatan, 0, ',', '.') }}</td>
             </tr>
             @empty
             <tr>
-                <td colspan="4" style="text-align: center;">Tidak ada data pemasukan pada periode ini.</td>
+                <td colspan="5" style="text-align: center;">Tidak ada data pemasukan pada periode ini.</td>
             </tr>
             @endforelse
         </tbody>

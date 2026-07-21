@@ -27,7 +27,7 @@
         <!-- Card Total Panen -->
         <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-5 w-full shadow-sm">
             <p class="text-sm font-semibold text-emerald-700 mb-1">Total Hasil Panen</p>
-            <h3 class="text-2xl font-bold text-slate-800">{{ number_format($totalPanen, 0, ',', '.') }} <span class="text-lg text-slate-500 font-medium">Biji / Kg</span></h3>
+            <h3 class="text-2xl font-bold text-slate-800">{{ number_format($totalPanen, 0, ',', '.') }} <span class="text-lg text-slate-500 font-medium">Biji</span></h3>
             <p class="text-xs font-medium text-slate-500 mt-1">{{ $panens->count() }} Data panen tercatat</p>
         </div>
 

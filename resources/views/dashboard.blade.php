@@ -21,7 +21,7 @@
                 <div class="absolute -right-4 -top-4 w-20 h-20 bg-white/20 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
                 <div class="relative z-10">
                     <p class="text-sm font-semibold opacity-90 mb-1">Total Hasil Panen</p>
-                    <h3 class="text-2xl font-bold">{{ number_format($totalPanen, 0, ',', '.') }} <span class="text-base font-medium">Biji/Kg</span></h3>
+                    <h3 class="text-2xl font-bold">{{ number_format($totalPanen, 0, ',', '.') }} <span class="text-base font-medium">Biji</span></h3>
                     <p class="text-xs opacity-80 mt-2">Seluruh periode panen</p>
                 </div>
             </div>

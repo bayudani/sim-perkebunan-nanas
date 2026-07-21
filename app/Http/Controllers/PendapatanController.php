@@ -21,13 +21,11 @@ class PendapatanController extends Controller
 
     public function create()
     {
-        //  Hanya Admin yang boleh tambah data
         if (auth()->user()->role !== 'admin') {
             abort(403, 'Akses Ditolak. Hanya Admin yang dapat menambah data.');
         }
 
-        // Mengambil data hasil panen untuk ditampilkan di dropdown pilihan form
-        $hasilPanens = HasilPanen::orderBy('tanggal_panen', 'desc')->get();
+        $hasilPanens = HasilPanen::with('pendapatans')->orderBy('tanggal_panen', 'desc')->get();
 
         return view('pendapatan.form', compact('hasilPanens'));
     }
@@ -39,6 +37,7 @@ class PendapatanController extends Controller
         $request->validate([
             'tanggal' => 'required|date',
             'hasil_panen_id' => 'required|exists:hasil_panens,id',
+            'jumlah_terjual' => 'required|numeric|min:0',
             'harga_per_kg' => 'required|numeric|min:0',
             'total_pendapatan' => 'required|numeric|min:0',
             'keterangan' => 'nullable|string|max:255',
@@ -47,6 +46,7 @@ class PendapatanController extends Controller
         Pendapatan::create([
             'tanggal' => $request->tanggal,
             'hasil_panen_id' => $request->hasil_panen_id,
+            'jumlah_terjual' => $request->jumlah_terjual,
             'harga_per_kg' => $request->harga_per_kg,
             'total_pendapatan' => $request->total_pendapatan,
             'keterangan' => $request->keterangan,
@@ -61,7 +61,7 @@ class PendapatanController extends Controller
         if (auth()->user()->role !== 'admin') abort(403);
 
         $pendapatan = Pendapatan::findOrFail($id);
-        $hasilPanens = HasilPanen::orderBy('tanggal_panen', 'desc')->get();
+        $hasilPanens = HasilPanen::with('pendapatans')->orderBy('tanggal_panen', 'desc')->get();
         
         return view('pendapatan.form', compact('pendapatan', 'hasilPanens'));
     }
@@ -73,6 +73,7 @@ class PendapatanController extends Controller
         $request->validate([
             'tanggal' => 'required|date',
             'hasil_panen_id' => 'required|exists:hasil_panens,id',
+            'jumlah_terjual' => 'required|numeric|min:0',
             'harga_per_kg' => 'required|numeric|min:0',
             'total_pendapatan' => 'required|numeric|min:0',
             'keterangan' => 'nullable|string|max:255',
@@ -82,6 +83,7 @@ class PendapatanController extends Controller
         $pendapatan->update([
             'tanggal' => $request->tanggal,
             'hasil_panen_id' => $request->hasil_panen_id,
+            'jumlah_terjual' => $request->jumlah_terjual,
             'harga_per_kg' => $request->harga_per_kg,
             'total_pendapatan' => $request->total_pendapatan,
             'keterangan' => $request->keterangan,

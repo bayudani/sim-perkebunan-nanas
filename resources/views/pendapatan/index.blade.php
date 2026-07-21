@@ -50,6 +50,9 @@
                             <div class="bg-slate-50 border border-slate-200 rounded-full px-4 py-1.5 inline-block text-xs font-semibold text-slate-500 uppercase tracking-wider shadow-sm">Sumber Panen</div>
                         </th>
                         <th class="px-2">
+                            <div class="bg-slate-50 border border-slate-200 rounded-full px-4 py-1.5 inline-block text-xs font-semibold text-slate-500 uppercase tracking-wider shadow-sm">Jumlah Terjual</div>
+                        </th>
+                        <th class="px-2">
                             <div class="bg-slate-50 border border-slate-200 rounded-full px-4 py-1.5 inline-block text-xs font-semibold text-slate-500 uppercase tracking-wider shadow-sm">Harga/Satuan</div>
                         </th>
                         <th class="px-2">
@@ -80,10 +83,13 @@
                         <td class="bg-white p-4 font-medium text-emerald-700 group-hover:bg-emerald-50/30 transition-colors">
                             @if($item->hasilPanen)
                                 Panen: {{ \Carbon\Carbon::parse($item->hasilPanen->tanggal_panen)->translatedFormat('d M Y') }} <br>
-                                <span class="text-xs text-slate-400 font-normal">({{ $item->hasilPanen->kualitas }} - {{ $item->hasilPanen->jumlah_panen }} Biji/Kg)</span>
+                                <span class="text-xs text-slate-400 font-normal">({{ $item->hasilPanen->kualitas }} - {{ $item->hasilPanen->jumlah_panen }} Biji)</span>
                             @else
                                 <span class="text-red-500 text-xs">Data panen dihapus</span>
                             @endif
+                        </td>
+                        <td class="bg-white p-4 font-medium group-hover:bg-emerald-50/30 transition-colors">
+                            {{ number_format($item->jumlah_terjual, 0, ',', '.') }} Biji
                         </td>
                         <td class="bg-white p-4 font-medium group-hover:bg-emerald-50/30 transition-colors">
                             Rp {{ number_format($item->harga_per_kg, 0, ',', '.') }}
@@ -115,7 +121,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="{{ auth()->user()->role === 'admin' ? 7 : 6 }}" class="bg-white p-8 text-center text-slate-400 rounded-2xl shadow-sm">
+                        <td colspan="{{ auth()->user()->role === 'admin' ? 8 : 7 }}" class="bg-white p-8 text-center text-slate-400 rounded-2xl shadow-sm">
                             Belum ada data pendapatan tercatat.
                         </td>
                     </tr>

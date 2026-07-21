@@ -10,7 +10,7 @@ class Pendapatan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'tanggal', 'hasil_panen_id', 'harga_per_kg', 'total_pendapatan', 'keterangan', 'user_id'
+        'tanggal', 'hasil_panen_id', 'jumlah_terjual', 'harga_per_kg', 'total_pendapatan', 'keterangan', 'user_id'
     ];
 
     public function user()

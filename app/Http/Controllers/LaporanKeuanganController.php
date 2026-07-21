@@ -63,6 +63,7 @@ class LaporanKeuanganController extends Controller
 
         $totalPemasukan = $pemasukans->sum('total_pendapatan');
         $totalPengeluaran = $pengeluarans->sum('jumlah');
+        $totalBijiTerjual = $pemasukans->sum('jumlah_terjual');
         $saldo = $totalPemasukan - $totalPengeluaran;
 
         $namaBulan = Carbon::createFromFormat('m', $bulan)->translatedFormat('F');
@@ -70,7 +71,7 @@ class LaporanKeuanganController extends Controller
         // Load view PDF dan passing data
         $pdf = Pdf::loadView('laporan.pdf', compact(
             'pemasukans', 'pengeluarans', 'totalPemasukan', 
-            'totalPengeluaran', 'saldo', 'namaBulan', 'tahun'
+            'totalPengeluaran', 'saldo', 'totalBijiTerjual', 'namaBulan', 'tahun'
         ));
 
         // Return file PDF untuk didownload
