@@ -39,7 +39,7 @@
                     <input type="number" name="jumlah_panen" value="{{ old('jumlah_panen', isset($panen) ? (int)$panen->jumlah_panen : '') }}" required min="1"
                         class="w-full border-slate-200 rounded-xl focus:ring-emerald-500 focus:border-emerald-500" placeholder="Contoh: 2000">
                     <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
-                        <span class="text-slate-400 text-sm">Biji / Kg</span>
+                        <span class="text-slate-400 text-sm">Biji</span>
                     </div>
                 </div>
                 @error('jumlah_panen') <span class="text-xs text-red-500 mt-1">{{ $message }}</span> @enderror
