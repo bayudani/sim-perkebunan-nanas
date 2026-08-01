@@ -53,6 +53,24 @@
             <span class="font-medium">Pendapatan</span>
         </a>
 
+        <!-- Perawatan -->
+        <a href="/perawatan" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 {{ request()->is('perawatan*') ? 'bg-emerald-600 text-white shadow-md' : 'text-emerald-100 hover:bg-emerald-700/50 hover:text-white' }}">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+            <span class="font-medium">Perawatan</span>
+        </a>
+
+        <!-- Data Pekerja -->
+        <a href="/pekerja" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 {{ request()->is('pekerja*') ? 'bg-emerald-600 text-white shadow-md' : 'text-emerald-100 hover:bg-emerald-700/50 hover:text-white' }}">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            <span class="font-medium">Data Pekerja</span>
+        </a>
+
+        <!-- Riwayat Budidaya -->
+        <a href="/riwayat-budidaya" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 {{ request()->is('riwayat-budidaya*') ? 'bg-emerald-600 text-white shadow-md' : 'text-emerald-100 hover:bg-emerald-700/50 hover:text-white' }}">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span class="font-medium">Riwayat Budidaya</span>
+        </a>
+
         <!-- Laporan Keuangan -->
         <a href="/laporan" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 {{ request()->is('laporan*') ? 'bg-emerald-600 text-white shadow-md' : 'text-emerald-100 hover:bg-emerald-700/50 hover:text-white' }}">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>

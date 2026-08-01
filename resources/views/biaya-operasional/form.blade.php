@@ -24,14 +24,27 @@
                     <label class="block text-sm font-medium text-slate-700 mb-2">Jenis Biaya <span class="text-red-500">*</span></label>
                     <select name="jenis_biaya" required class="w-full border-slate-200 rounded-xl focus:ring-emerald-500 focus:border-emerald-500">
                         <option value="">-- Pilih Jenis --</option>
-                        <option value="Pupuk" {{ old('jenis_biaya', $biaya->jenis_biaya ?? '') == 'Pupuk' ? 'selected' : '' }}>Pupuk</option>
-                        <option value="Tenaga Kerja" {{ old('jenis_biaya', $biaya->jenis_biaya ?? '') == 'Tenaga Kerja' ? 'selected' : '' }}>Tenaga Kerja</option>
-                        <option value="Transportasi" {{ old('jenis_biaya', $biaya->jenis_biaya ?? '') == 'Transportasi' ? 'selected' : '' }}>Transportasi</option>
-                        <option value="Perawatan Alat" {{ old('jenis_biaya', $biaya->jenis_biaya ?? '') == 'Perawatan Alat' ? 'selected' : '' }}>Perawatan Alat</option>
-                        <option value="Pestisida" {{ old('jenis_biaya', $biaya->jenis_biaya ?? '') == 'Pestisida' ? 'selected' : '' }}>Pestisida</option>
+                        @foreach(['Pembelian Pupuk', 'Pembelian Pestisida', 'Upah Pekerja', 'Transportasi', 'Peralatan'] as $jenis)
+                            <option value="{{ $jenis }}" {{ old('jenis_biaya', $biaya->jenis_biaya ?? '') == $jenis ? 'selected' : '' }}>{{ $jenis }}</option>
+                        @endforeach
                         <option value="Lainnya" {{ old('jenis_biaya', $biaya->jenis_biaya ?? '') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
                     </select>
                     @error('jenis_biaya') <span class="text-xs text-red-500 mt-1">{{ $message }}</span> @enderror
+                </div>
+
+                <!-- Kegiatan Perawatan Terkait -->
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Kegiatan Perawatan Terkait (Opsional)</label>
+                    <select name="perawatan_id" class="w-full border-slate-200 rounded-xl focus:ring-emerald-500 focus:border-emerald-500 bg-slate-50">
+                        <option value="">-- Tidak Ada / Pilih Kegiatan Perawatan --</option>
+                        @foreach($perawatans as $per)
+                            <option value="{{ $per->id }}" {{ old('perawatan_id', $biaya->perawatan_id ?? '') == $per->id ? 'selected' : '' }}>
+                                {{ \Carbon\Carbon::parse($per->tanggal)->translatedFormat('d M Y') }} — [{{ $per->jenis_kegiatan }}] — {{ $per->blok_lahan }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('perawatan_id') <span class="text-xs text-red-500 mt-1">{{ $message }}</span> @enderror
+                    <p class="text-xs text-slate-400 mt-1">Kaitkan biaya ini dengan kegiatan perawatan tertentu jika ada.</p>
                 </div>
             </div>
 

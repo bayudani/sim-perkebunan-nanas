@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class BiayaOperasional extends Model
+class RiwayatBudidaya extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'tanggal', 'jenis_biaya', 'jumlah', 'keterangan', 'user_id', 'perawatan_id'
+        'tanggal', 'jenis_kegiatan', 'blok_lahan', 'keterangan', 'user_id'
     ];
 
     public function user()
@@ -18,8 +18,8 @@ class BiayaOperasional extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function perawatan()
+    public function pekerjas()
     {
-        return $this->belongsTo(Perawatan::class);
+        return $this->belongsToMany(Pekerja::class, 'riwayat_budidaya_pekerja');
     }
 }

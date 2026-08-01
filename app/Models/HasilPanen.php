@@ -10,8 +10,13 @@ class HasilPanen extends Model
     use HasFactory;
 
     protected $fillable = [
-        'tanggal_panen', 'jumlah_panen', 'kualitas', 'keterangan', 'user_id'
+        'tanggal_panen', 'jumlah_panen', 'jumlah_terjual', 'kualitas', 'keterangan', 'user_id'
     ];
+
+    public function getSisaAttribute()
+    {
+        return $this->jumlah_panen - $this->jumlah_terjual;
+    }
 
     public function user()
     {

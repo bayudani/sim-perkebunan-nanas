@@ -35,6 +35,7 @@ class HasilPanenController extends Controller
         $request->validate([
             'tanggal_panen' => 'required|date',
             'jumlah_panen' => 'required|numeric|min:1',
+            'jumlah_terjual' => 'required|numeric|min:0',
             'kualitas' => 'required|string|max:50',
             'keterangan' => 'nullable|string|max:255',
         ]);
@@ -42,6 +43,7 @@ class HasilPanenController extends Controller
         HasilPanen::create([
             'tanggal_panen' => $request->tanggal_panen,
             'jumlah_panen' => $request->jumlah_panen,
+            'jumlah_terjual' => $request->jumlah_terjual,
             'kualitas' => $request->kualitas,
             'keterangan' => $request->keterangan,
             'user_id' => auth()->id(), 
@@ -65,6 +67,7 @@ class HasilPanenController extends Controller
         $request->validate([
             'tanggal_panen' => 'required|date',
             'jumlah_panen' => 'required|numeric|min:1',
+            'jumlah_terjual' => 'required|numeric|min:0',
             'kualitas' => 'required|string|max:50',
             'keterangan' => 'nullable|string|max:255',
         ]);
@@ -73,6 +76,7 @@ class HasilPanenController extends Controller
         $panen->update([
             'tanggal_panen' => $request->tanggal_panen,
             'jumlah_panen' => $request->jumlah_panen,
+            'jumlah_terjual' => $request->jumlah_terjual,
             'kualitas' => $request->kualitas,
             'keterangan' => $request->keterangan,
         ]);

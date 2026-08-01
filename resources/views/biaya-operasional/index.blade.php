@@ -50,6 +50,9 @@
                             <div class="bg-slate-50 border border-slate-200 rounded-full px-4 py-1.5 inline-block text-xs font-semibold text-slate-500 uppercase tracking-wider shadow-sm">Jenis Biaya</div>
                         </th>
                         <th class="px-2">
+                            <div class="bg-slate-50 border border-slate-200 rounded-full px-4 py-1.5 inline-block text-xs font-semibold text-slate-500 uppercase tracking-wider shadow-sm">Kegiatan Perawatan</div>
+                        </th>
+                        <th class="px-2">
                             <div class="bg-slate-50 border border-slate-200 rounded-full px-4 py-1.5 inline-block text-xs font-semibold text-slate-500 uppercase tracking-wider shadow-sm">Nominal</div>
                         </th>
                         <th class="px-2">
@@ -76,6 +79,14 @@
                         </td>
                         <td class="bg-white p-4 font-medium group-hover:bg-emerald-50/30 transition-colors">
                             {{ $item->jenis_biaya }}
+                        </td>
+                        <td class="bg-white p-4 group-hover:bg-emerald-50/30 transition-colors">
+                            @if($item->perawatan)
+                                <span class="text-xs font-semibold text-emerald-700">{{ $item->perawatan->jenis_kegiatan }}</span>
+                                <span class="text-xs text-slate-400 block">{{ $item->perawatan->blok_lahan }}</span>
+                            @else
+                                <span class="text-slate-400">-</span>
+                            @endif
                         </td>
                         <td class="bg-white p-4 font-bold text-red-600 group-hover:bg-emerald-50/30 transition-colors">
                             Rp {{ number_format($item->jumlah, 0, ',', '.') }}
@@ -106,7 +117,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="{{ auth()->user()->role === 'admin' ? 6 : 5 }}" class="bg-white p-8 text-center text-slate-400 rounded-2xl shadow-sm">
+                        <td colspan="{{ auth()->user()->role === 'admin' ? 7 : 6 }}" class="bg-white p-8 text-center text-slate-400 rounded-2xl shadow-sm">
                             Belum ada transaksi tercatat.
                         </td>
                     </tr>
