@@ -15,7 +15,12 @@ class BiayaOperasionalController extends Controller
         // Menghitung total biaya operasional
         $totalBiaya = $biayas->sum('jumlah');
 
-        return view('biaya-operasional.index', compact('biayas', 'totalBiaya'));
+        // Total per kategori
+        $totalPupuk = $biayas->where('jenis_biaya', 'Pembelian Pupuk')->sum('jumlah');
+        $totalPestisida = $biayas->where('jenis_biaya', 'Pembelian Pestisida')->sum('jumlah');
+        $totalUpah = $biayas->where('jenis_biaya', 'Upah Pekerja')->sum('jumlah');
+
+        return view('biaya-operasional.index', compact('biayas', 'totalBiaya', 'totalPupuk', 'totalPestisida', 'totalUpah'));
     }
 
     public function create()

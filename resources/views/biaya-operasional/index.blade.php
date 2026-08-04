@@ -25,10 +25,37 @@
     <div class="space-y-6">
         
         <!-- Card Total Biaya -->
-        <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-5 w-full  shadow-sm">
+        {{-- <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-5 w-full  shadow-sm">
             <p class="text-sm font-semibold text-emerald-700 mb-1">Total Biaya Operasional</p>
             <h3 class="text-2xl font-bold text-slate-800">Rp {{ number_format($totalBiaya, 0, ',', '.') }}</h3>
             <p class="text-xs font-medium text-slate-500 mt-1">{{ $biayas->count() }} Transaksi tercatat</p>
+        </div> --}}
+
+        <!-- Stats Card Per Kategori -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Pembelian Pupuk (Hijau) -->
+            <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 shadow-sm relative overflow-hidden">
+                <div class="absolute -right-4 -top-4 w-20 h-20 bg-emerald-500/10 rounded-full"></div>
+                <p class="text-sm font-semibold text-emerald-700 mb-1">Total Pembelian Pupuk</p>
+                <h3 class="text-2xl font-bold text-slate-800">Rp {{ number_format($totalPupuk, 0, ',', '.') }}</h3>
+                <p class="text-xs font-medium text-slate-500 mt-1">{{ $biayas->where('jenis_biaya', 'Pembelian Pupuk')->count() }} Transaksi</p>
+            </div>
+
+            <!-- Pembelian Pestisida (Biru) -->
+            <div class="bg-blue-50 border border-blue-200 rounded-2xl p-6 shadow-sm relative overflow-hidden">
+                <div class="absolute -right-4 -top-4 w-20 h-20 bg-blue-500/10 rounded-full"></div>
+                <p class="text-sm font-semibold text-blue-700 mb-1">Total Pembelian Pestisida</p>
+                <h3 class="text-2xl font-bold text-slate-800">Rp {{ number_format($totalPestisida, 0, ',', '.') }}</h3>
+                <p class="text-xs font-medium text-slate-500 mt-1">{{ $biayas->where('jenis_biaya', 'Pembelian Pestisida')->count() }} Transaksi</p>
+            </div>
+
+            <!-- Upah Pekerja (Kuning) -->
+            <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 shadow-sm relative overflow-hidden">
+                <div class="absolute -right-4 -top-4 w-20 h-20 bg-amber-500/10 rounded-full"></div>
+                <p class="text-sm font-semibold text-amber-700 mb-1">Total Upah Pekerja</p>
+                <h3 class="text-2xl font-bold text-slate-800">Rp {{ number_format($totalUpah, 0, ',', '.') }}</h3>
+                <p class="text-xs font-medium text-slate-500 mt-1">{{ $biayas->where('jenis_biaya', 'Upah Pekerja')->count() }} Transaksi</p>
+            </div>
         </div>
 
         <!-- Container Tabel -->
