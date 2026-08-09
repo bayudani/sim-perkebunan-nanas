@@ -15,7 +15,12 @@ class HasilPanenController extends Controller
         // Menghitung total jumlah panen
         $totalPanen = $panens->sum('jumlah_panen');
 
-        return view('hasil-panen.index', compact('panens', 'totalPanen'));
+        // Total panen per blok/lahan
+        $totalPerBlok = $panens->groupBy('blok_lahan')
+            ->map(fn($items) => $items->sum('jumlah_panen'))
+            ->sortDesc();
+
+        return view('hasil-panen.index', compact('panens', 'totalPanen', 'totalPerBlok'));
     }
 
     public function create()
@@ -34,6 +39,7 @@ class HasilPanenController extends Controller
 
         $request->validate([
             'tanggal_panen' => 'required|date',
+            'blok_lahan' => 'required|string|max:100',
             'jumlah_panen' => 'required|numeric|min:1',
             'jumlah_terjual' => 'required|numeric|min:0',
             'kualitas' => 'required|string|max:50',
@@ -42,6 +48,7 @@ class HasilPanenController extends Controller
 
         HasilPanen::create([
             'tanggal_panen' => $request->tanggal_panen,
+            'blok_lahan' => $request->blok_lahan,
             'jumlah_panen' => $request->jumlah_panen,
             'jumlah_terjual' => $request->jumlah_terjual,
             'kualitas' => $request->kualitas,
@@ -66,6 +73,7 @@ class HasilPanenController extends Controller
 
         $request->validate([
             'tanggal_panen' => 'required|date',
+            'blok_lahan' => 'required|string|max:100',
             'jumlah_panen' => 'required|numeric|min:1',
             'jumlah_terjual' => 'required|numeric|min:0',
             'kualitas' => 'required|string|max:50',
@@ -75,6 +83,7 @@ class HasilPanenController extends Controller
         $panen = HasilPanen::findOrFail($id);
         $panen->update([
             'tanggal_panen' => $request->tanggal_panen,
+            'blok_lahan' => $request->blok_lahan,
             'jumlah_panen' => $request->jumlah_panen,
             'jumlah_terjual' => $request->jumlah_terjual,
             'kualitas' => $request->kualitas,

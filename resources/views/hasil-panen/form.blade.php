@@ -26,6 +26,20 @@
                     @error('tanggal_panen') <span class="text-xs text-red-500 mt-1">{{ $message }}</span> @enderror
                 </div>
 
+                <!-- Blok/Lahan -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Blok / Lahan <span class="text-red-500">*</span></label>
+                    <select name="blok_lahan" required class="w-full border-slate-200 rounded-xl focus:ring-emerald-500 focus:border-emerald-500">
+                        <option value="">-- Pilih Blok/Lahan --</option>
+                        @foreach(['Blok A', 'Blok B', 'Blok C', 'Blok D'] as $blok)
+                            <option value="{{ $blok }}" {{ old('blok_lahan', $panen->blok_lahan ?? '') == $blok ? 'selected' : '' }}>{{ $blok }}</option>
+                        @endforeach
+                    </select>
+                    @error('blok_lahan') <span class="text-xs text-red-500 mt-1">{{ $message }}</span> @enderror
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Kualitas Panen -->
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-2">Kualitas Panen <span class="text-red-500">*</span></label>

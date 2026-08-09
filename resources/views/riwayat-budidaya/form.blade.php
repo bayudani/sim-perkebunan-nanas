@@ -34,8 +34,12 @@
                 <!-- Blok/Lahan -->
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-2">Blok / Lahan <span class="text-red-500">*</span></label>
-                    <input type="text" name="blok_lahan" value="{{ old('blok_lahan', $riwayat->blok_lahan ?? '') }}" required
-                        class="w-full border-slate-200 rounded-xl focus:ring-emerald-500 focus:border-emerald-500" placeholder="Contoh: Blok A1">
+                    <select name="blok_lahan" required class="w-full border-slate-200 rounded-xl focus:ring-emerald-500 focus:border-emerald-500">
+                        <option value="">-- Pilih Blok/Lahan --</option>
+                        @foreach(['Blok A', 'Blok B', 'Blok C', 'Blok D'] as $blok)
+                            <option value="{{ $blok }}" {{ old('blok_lahan', $riwayat->blok_lahan ?? '') == $blok ? 'selected' : '' }}>{{ $blok }}</option>
+                        @endforeach
+                    </select>
                     @error('blok_lahan') <span class="text-xs text-red-500 mt-1">{{ $message }}</span> @enderror
                 </div>
 

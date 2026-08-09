@@ -31,6 +31,36 @@
             <p class="text-xs font-medium text-slate-500 mt-1">{{ $panens->count() }} Data panen tercatat</p>
         </div>
 
+        <!-- Stats Card Per Blok/Lahan -->
+        @php
+            $blokColors = [
+                'bg-emerald-50 border-emerald-200 text-emerald-700',
+                'bg-blue-50 border-blue-200 text-blue-700',
+                'bg-amber-50 border-amber-200 text-amber-700',
+                'bg-rose-50 border-rose-200 text-rose-700',
+                'bg-violet-50 border-violet-200 text-violet-700',
+                'bg-cyan-50 border-cyan-200 text-cyan-700',
+                'bg-lime-50 border-lime-200 text-lime-700',
+                'bg-orange-50 border-orange-200 text-orange-700',
+            ];
+        @endphp
+        @if($totalPerBlok->count() > 0)
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            @foreach($totalPerBlok as $blok => $total)
+                @php
+                    $palette = $blokColors[$loop->index % count($blokColors)];
+                    $parts = explode(' ', $palette);
+                @endphp
+                <div class="{{ $parts[0] }} border {{ $parts[1] }} rounded-2xl p-6 shadow-sm relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 w-20 h-20 bg-white/20 rounded-full"></div>
+                    <p class="text-sm font-semibold {{ $parts[2] }} mb-1">{{ $blok }}</p>
+                    <h3 class="text-2xl font-bold text-slate-800">{{ number_format($total, 0, ',', '.') }} <span class="text-base text-slate-500 font-medium">Biji</span></h3>
+                    <p class="text-xs font-medium text-slate-500 mt-1">{{ $panens->where('blok_lahan', $blok)->count() }} Data panen</p>
+                </div>
+            @endforeach
+        </div>
+        @endif
+
         <!-- Container Tabel -->
         <div class="overflow-x-auto pb-4">
             
@@ -44,6 +74,9 @@
                         </th>
                         <th class="px-2">
                             <div class="bg-slate-50 border border-slate-200 rounded-full px-4 py-1.5 inline-block text-xs font-semibold text-slate-500 uppercase tracking-wider shadow-sm">Tanggal Panen</div>
+                        </th>
+                        <th class="px-2">
+                            <div class="bg-slate-50 border border-slate-200 rounded-full px-4 py-1.5 inline-block text-xs font-semibold text-slate-500 uppercase tracking-wider shadow-sm">Blok/Lahan</div>
                         </th>
                         <th class="px-2">
                             <div class="bg-slate-50 border border-slate-200 rounded-full px-4 py-1.5 inline-block text-xs font-semibold text-slate-500 uppercase tracking-wider shadow-sm">Jumlah Panen</div>
@@ -77,6 +110,9 @@
                         </td>
                         <td class="bg-white p-4 group-hover:bg-emerald-50/30 transition-colors">
                             {{ \Carbon\Carbon::parse($item->tanggal_panen)->translatedFormat('d F Y') }}
+                        </td>
+                        <td class="bg-white p-4 font-medium text-emerald-700 group-hover:bg-emerald-50/30 transition-colors">
+                            {{ $item->blok_lahan ?? '-' }}
                         </td>
                         <td class="bg-white p-4 font-bold text-amber-600 group-hover:bg-emerald-50/30 transition-colors">
                             {{ number_format($item->jumlah_panen, 0, ',', '.') }}
@@ -117,7 +153,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="{{ auth()->user()->role === 'admin' ? 8 : 7 }}" class="bg-white p-8 text-center text-slate-400 rounded-2xl shadow-sm">
+                        <td colspan="{{ auth()->user()->role === 'admin' ? 9 : 8 }}" class="bg-white p-8 text-center text-slate-400 rounded-2xl shadow-sm">
                             Belum ada data hasil panen tercatat.
                         </td>
                     </tr>
