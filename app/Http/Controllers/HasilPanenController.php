@@ -27,10 +27,10 @@ class HasilPanenController extends Controller
             ->groupBy('blok_lahan')
             ->map(fn($items) => $items->flatMap(fn($item) => $item->pendapatans)->sum('total_pendapatan'));
 
-        // Biaya operasional per blok (via relasi perawatan)
+        // Biaya operasional per blok (dari kolom blok_lahan, fallback blok perawatan)
         $biayaPerBlok = BiayaOperasional::with('perawatan')->get()
-            ->filter(fn($biaya) => $biaya->perawatan && $biaya->perawatan->blok_lahan)
-            ->groupBy(fn($biaya) => $biaya->perawatan->blok_lahan)
+            ->filter(fn($biaya) => $biaya->blok_lahan ?? $biaya->perawatan->blok_lahan ?? null)
+            ->groupBy(fn($biaya) => $biaya->blok_lahan ?? $biaya->perawatan->blok_lahan)
             ->map(fn($items) => $items->sum('jumlah'));
 
         return view('hasil-panen.index', compact(

@@ -42,6 +42,7 @@ class BiayaOperasionalController extends Controller
         $request->validate([
             'tanggal' => 'required|date',
             'jenis_biaya' => 'required|string|max:50',
+            'blok_lahan' => 'nullable|string|max:100',
             'jumlah' => 'required|numeric|min:0',
             'perawatan_id' => 'nullable|exists:perawatans,id',
             'keterangan' => 'nullable|string|max:255',
@@ -50,6 +51,7 @@ class BiayaOperasionalController extends Controller
         BiayaOperasional::create([
             'tanggal' => $request->tanggal,
             'jenis_biaya' => $request->jenis_biaya,
+            'blok_lahan' => $request->blok_lahan,
             'jumlah' => $request->jumlah,
             'perawatan_id' => $request->perawatan_id,
             'keterangan' => $request->keterangan,
@@ -75,6 +77,7 @@ class BiayaOperasionalController extends Controller
         $request->validate([
             'tanggal' => 'required|date',
             'jenis_biaya' => 'required|string|max:50',
+            'blok_lahan' => 'nullable|string|max:100',
             'jumlah' => 'required|numeric|min:0',
             'perawatan_id' => 'nullable|exists:perawatans,id',
             'keterangan' => 'nullable|string|max:255',
@@ -84,6 +87,7 @@ class BiayaOperasionalController extends Controller
         $biaya->update([
             'tanggal' => $request->tanggal,
             'jenis_biaya' => $request->jenis_biaya,
+            'blok_lahan' => $request->blok_lahan,
             'jumlah' => $request->jumlah,
             'perawatan_id' => $request->perawatan_id,
             'keterangan' => $request->keterangan,

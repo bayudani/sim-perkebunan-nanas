@@ -32,6 +32,19 @@
                     @error('jenis_biaya') <span class="text-xs text-red-500 mt-1">{{ $message }}</span> @enderror
                 </div>
 
+                <!-- Blok/Lahan -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Blok / Lahan</label>
+                    <select name="blok_lahan" class="w-full border-slate-200 rounded-xl focus:ring-emerald-500 focus:border-emerald-500">
+                        <option value="">-- Umum / Tidak Tentu --</option>
+                        @foreach(['Blok A', 'Blok B', 'Blok C', 'Blok D'] as $blok)
+                            <option value="{{ $blok }}" {{ old('blok_lahan', $biaya->blok_lahan ?? '') == $blok ? 'selected' : '' }}>{{ $blok }}</option>
+                        @endforeach
+                    </select>
+                    @error('blok_lahan') <span class="text-xs text-red-500 mt-1">{{ $message }}</span> @enderror
+                    <p class="text-xs text-slate-400 mt-1">Pilih blok untuk perhitungan untung/rugi per blok.</p>
+                </div>
+
                 <!-- Kegiatan Perawatan Terkait -->
                 <div class="md:col-span-2">
                     <label class="block text-sm font-medium text-slate-700 mb-2">Kegiatan Perawatan Terkait (Opsional)</label>

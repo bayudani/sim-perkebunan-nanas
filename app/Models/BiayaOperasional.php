@@ -10,7 +10,7 @@ class BiayaOperasional extends Model
     use HasFactory;
 
     protected $fillable = [
-        'tanggal', 'jenis_biaya', 'jumlah', 'keterangan', 'user_id', 'perawatan_id'
+        'tanggal', 'jenis_biaya', 'blok_lahan', 'jumlah', 'keterangan', 'user_id', 'perawatan_id'
     ];
 
     public function user()
