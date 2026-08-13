@@ -27,33 +27,46 @@
         <!-- Card Total Panen -->
         
 
-        <!-- Stats Card Per Blok/Lahan -->
-        @php
-            $blokColors = [
-                'bg-emerald-50 border-emerald-200 text-emerald-700',
-                'bg-blue-50 border-blue-200 text-blue-700',
-                'bg-amber-50 border-amber-200 text-amber-700',
-                'bg-rose-50 border-rose-200 text-rose-700',
-                'bg-violet-50 border-violet-200 text-violet-700',
-                'bg-cyan-50 border-cyan-200 text-cyan-700',
-                'bg-lime-50 border-lime-200 text-lime-700',
-                'bg-orange-50 border-orange-200 text-orange-700',
-            ];
-        @endphp
+        <!-- Card Untung/Rugi Per Blok/Lahan -->
         @if($totalPerBlok->count() > 0)
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            @foreach($totalPerBlok as $blok => $total)
-                @php
-                    $palette = $blokColors[$loop->index % count($blokColors)];
-                    $parts = explode(' ', $palette);
-                @endphp
-                <div class="{{ $parts[0] }} border {{ $parts[1] }} rounded-2xl p-6 shadow-sm relative overflow-hidden">
-                    <div class="absolute -right-4 -top-4 w-20 h-20 bg-white/20 rounded-full"></div>
-                    <p class="text-sm font-semibold {{ $parts[2] }} mb-1">{{ $blok }}</p>
-                    <h3 class="text-2xl font-bold text-slate-800">{{ number_format($total, 0, ',', '.') }} <span class="text-base text-slate-500 font-medium">Biji</span></h3>
-                    <p class="text-xs font-medium text-slate-500 mt-1">{{ $panens->where('blok_lahan', $blok)->count() }} Data panen</p>
-                </div>
-            @endforeach
+        <div>
+            <div class="flex items-center gap-2 mb-4">
+                <h2 class="text-lg font-bold text-slate-800">Untung / Rugi per Blok</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                @foreach($totalPerBlok as $blok => $total)
+                    @php
+                        $pendapatanBlok = $pendapatanPerBlok[$blok] ?? 0;
+                        $biayaBlok = $biayaPerBlok[$blok] ?? 0;
+                        $selisih = $pendapatanBlok - $biayaBlok;
+                        $untung = $selisih >= 0;
+                    @endphp
+                    <div class="rounded-2xl p-6 shadow-sm relative overflow-hidden border {{ $untung ? 'bg-emerald-50 border-emerald-200' : 'bg-red-50 border-red-200' }}">
+                        <div class="absolute -right-4 -top-4 w-20 h-20 {{ $untung ? 'bg-emerald-200/30' : 'bg-red-200/30' }} rounded-full"></div>
+                        <div class="flex items-center justify-between mb-4">
+                            <p class="text-sm font-bold {{ $untung ? 'text-emerald-700' : 'text-red-700' }}">{{ $blok }}</p>
+                            <span class="px-3 py-1 rounded-full text-xs font-bold {{ $untung ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700' }}">
+                                {{ $untung ? 'UNTUNG' : 'RUGI' }}
+                            </span>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-500">Pendapatan</span>
+                                <span class="font-semibold text-green-600">Rp {{ number_format($pendapatanBlok, 0, ',', '.') }}</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-500">Biaya</span>
+                                <span class="font-semibold text-red-600">Rp {{ number_format($biayaBlok, 0, ',', '.') }}</span>
+                            </div>
+                            <div class="flex justify-between items-center border-t pt-2 mt-2">
+                                <span class="font-medium text-slate-600">{{ $untung ? 'Keuntungan' : 'Kerugian' }}</span>
+                                <span class="font-bold {{ $untung ? 'text-emerald-600' : 'text-red-600' }}">Rp {{ number_format(abs($selisih), 0, ',', '.') }}</span>
+                            </div>
+                        </div>
+                        <p class="text-xs font-medium text-slate-400 mt-3">Total panen {{ number_format($total, 0, ',', '.') }} biji · {{ $panens->where('blok_lahan', $blok)->count() }} data</p>
+                    </div>
+                @endforeach
+            </div>
         </div>
         @endif
 

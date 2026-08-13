@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\HasilPanen;
+use App\Models\BiayaOperasional;
 use Illuminate\Http\Request;
 
 class HasilPanenController extends Controller
@@ -10,17 +11,31 @@ class HasilPanenController extends Controller
     public function index()
     {
         // Mengambil semua data hasil panen diurutkan dari yang terbaru
-        $panens = HasilPanen::with('user')->orderBy('tanggal_panen', 'desc')->get();
+        $panens = HasilPanen::with(['user', 'pendapatans'])->orderBy('tanggal_panen', 'desc')->get();
         
         // Menghitung total jumlah panen
         $totalPanen = $panens->sum('jumlah_panen');
 
-        // Total panen per blok/lahan
-        $totalPerBlok = $panens->groupBy('blok_lahan')
+        // Total panen per blok/lahan (abaikan blok kosong)
+        $totalPerBlok = $panens->filter(fn($item) => !empty($item->blok_lahan))
+            ->groupBy('blok_lahan')
             ->map(fn($items) => $items->sum('jumlah_panen'))
             ->sortDesc();
 
-        return view('hasil-panen.index', compact('panens', 'totalPanen', 'totalPerBlok'));
+        // Pendapatan per blok (dari penjualan yang tercatat pada hasil panen)
+        $pendapatanPerBlok = $panens->filter(fn($item) => !empty($item->blok_lahan))
+            ->groupBy('blok_lahan')
+            ->map(fn($items) => $items->flatMap(fn($item) => $item->pendapatans)->sum('total_pendapatan'));
+
+        // Biaya operasional per blok (via relasi perawatan)
+        $biayaPerBlok = BiayaOperasional::with('perawatan')->get()
+            ->filter(fn($biaya) => $biaya->perawatan && $biaya->perawatan->blok_lahan)
+            ->groupBy(fn($biaya) => $biaya->perawatan->blok_lahan)
+            ->map(fn($items) => $items->sum('jumlah'));
+
+        return view('hasil-panen.index', compact(
+            'panens', 'totalPanen', 'totalPerBlok', 'pendapatanPerBlok', 'biayaPerBlok'
+        ));
     }
 
     public function create()
