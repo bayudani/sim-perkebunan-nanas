@@ -62,7 +62,7 @@
         <div class="overflow-x-auto pb-4">
             
             <!-- Tabel dengan efek baris melayang -->
-            <table class="w-full text-left border-separate border-spacing-y-3 min-w-max">
+            <table class="w-full text-left border-separate border-spacing-y-3">
                 
                 <!-- Header Tabel "Pill" -->
                 <thead>
